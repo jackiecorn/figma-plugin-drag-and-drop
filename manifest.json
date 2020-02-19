@@ -1,0 +1,7 @@
+{
+	"name": "Drag and Drop Example",
+	"id": "759684442074310904",
+	"api": "1.0.0",
+	"main": "code.js",
+	"ui": "ui.html"
+}

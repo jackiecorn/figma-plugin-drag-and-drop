@@ -1,0 +1,40 @@
+<!-- Create a draggable block -->
+<div id="block" style="background:#C4C4C4; width:100px; height:100px; cursor:grab;" draggable="true"></div>
+
+<script>
+	// Initialize offset variables to be assigned later
+	let offsetX = 0;
+	let offsetY = 0;
+
+	document.getElementById('block').addEventListener('dragstart', e => {
+		// Getting the offset position (The position of the cursor relative to the top-left corner of item being dragged)
+		offsetX = e.offsetX;
+		offsetY = e.offsetY;
+	});
+
+	document.getElementById('block').addEventListener('dragend', e => {
+		// Don't proceed if the block was dropped inside the plugin window.
+		if (e.view.length === 0) return;
+
+		// Getting the position of the cursor relative to the top-left corner of the browser page (Where the hamburger icon is)
+		const dropPosition = {
+			clientX: e.clientX,
+			clientY: e.clientY
+		};
+
+		// Getting the size of the app/browser window.
+		const windowSize = {
+			width: window.outerWidth,
+			height: window.outerHeight
+		};
+
+		// These are the offsets set from the dragstart event.
+		const offset = {
+			x: offsetX,
+			y: offsetY
+		};
+
+		// Sending them over to the main code.
+		window.parent.postMessage({ pluginMessage: { dropPosition, windowSize, offset } }, '*');
+	});
+</script>
