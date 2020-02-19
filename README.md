@@ -2,4 +2,4 @@
 
 This project illustrates a reliable way to implement drag and drop from the plugin window to the Figma canvas.
 
-![Drag and Drop](https://github.com/jachui/figma-plugin-drag-and-drop/raw/master/demo.gif)
+![Drag and Drop](https://github.com/jackiecorn/figma-plugin-drag-and-drop/raw/master/demo.gif)
