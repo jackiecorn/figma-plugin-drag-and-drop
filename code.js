@@ -1,6 +1,6 @@
 figma.showUI(__html__);
 figma.ui.onmessage = msg => {
-    const { dropPosition, windowSize, offset } = msg;
+    const { dropPosition, windowSize, offset, itemSize } = msg;
     // Getting the position and size of the visible area of the canvas.
     const bounds = figma.viewport.bounds;
     // Getting the zoom level
@@ -15,11 +15,14 @@ figma.ui.onmessage = msg => {
     // Getting the position of the cursor relative to the top-left corner of the canvas.
     const xFromCanvas = hasUI ? dropPosition.clientX - leftPaneWidth : dropPosition.clientX;
     const yFromCanvas = hasUI ? dropPosition.clientY - 40 : dropPosition.clientY;
+    // Create a rectangle
     const rect = figma.createRectangle();
-    rect.resize(100, 100);
+    // Resize the rectangle to be the same size as the item from the plugin window.
+    rect.resize(itemSize.width, itemSize.height);
     figma.currentPage.appendChild(rect);
     // The canvas position of the drop point can be calculated using the following:
     rect.x = bounds.x + xFromCanvas / zoom - offset.x;
     rect.y = bounds.y + yFromCanvas / zoom - offset.y;
+    // Select the rectangle
     figma.currentPage.selection = [rect];
 };
